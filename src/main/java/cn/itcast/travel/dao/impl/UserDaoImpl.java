@@ -15,6 +15,7 @@ public class UserDaoImpl implements UserDao {
 
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
+    //根据用户名查询用户信息
     @Override
     public User findByUsername(String username) {
         User user = null;
@@ -28,6 +29,7 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    //用户保存
     @Override
     public void save(User user) {
         //1.定义sql
