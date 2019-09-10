@@ -76,6 +76,7 @@ public class RegistUserServlet extends HttpServlet {
         //将info对象序列化为json
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(info);
+
         //将json数据写回客户端
         //设置Content-type
         response.setContentType("application/json;charset=utf-8");

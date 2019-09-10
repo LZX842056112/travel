@@ -1,10 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ 编码，IE支持，视口窗口设备宽度，缩放比例1-->
+    <title>某旅游网</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/include.js"></script>
+
+    <script scr="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script scr="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+
 </head>
 <body>
+    <!--引入头部-->
+    <div id="header"></div>
+    <!--banner start-->
+    <section id="banner">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!--indicators-->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
 
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="images/banner_1.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="images/banner_2.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="images/banner_3.jpg" alt="">
+                </div>
+
+
+
+                <div id="errorMsg" style="color: red;text-align: center;"></div>
+                <!--注册表单-->
+                <form id="registerForm" action="user">
+                    <!--提交处理请求的标识符-->
+                    <input type="hidden" name="action" value="register">
+                    <table style="...">
+                        <tr>
+                            <td class="td_left">
+                                <label for="username">用户名</label>
+                            </td>
+                            <td class="td_right">
+                                <input type="text" placeholder="请输入账号" name="username" id="username">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_left">
+                                <label for="password">密码</label>
+                            </td>
+                            <td class="td_right">
+                                <input type="text" placeholder="请输入密码" name="password" id="password">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_left">
+                                <label for="email">Email</label>
+                            </td>
+                            <td class="td_right">
+                                <input type="text" placeholder="请输入邮箱" name="email" id="email">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_left">
+                                <label for="name">姓名</label>
+                            </td>
+                            <td class="td_right">
+                                <input type="text" placeholder="请输入姓名" name="name" id="name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_left">
+                                <label for="telephone">手机号</label>
+                            </td>
+                            <td class="td_right">
+                                <input type="text" placeholder="请输入手机号" name="telephone" id="telephone">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_left">
+                                <label for="sex">性别</label>
+                            </td>
+                            <td class="td_right gender">
+                                <input type="radio" id="sex" name="sex" value="男" checked>男
+                                <input type="radio" name="sex" value="女">女
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_left">
+                                <label for="birthday">出生日期</label>
+                            </td>
+                            <td class="td_right">
+                                <input type="date" name="birthday" id="birthday" placeholder="年/月/日">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_left">
+                                <label for="check">验证码</label>
+                            </td>
+                            <td class="td_right check">
+                                <input type="text" name="check" id="check" class="check">
+                                <img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+                                <script type="text/javascript">
+                                    //图片点击事件
+                                    function changeCheckCode(img) {
+                                        img.src="checkCode?"+new Date().getTime();
+                                    }
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_left">
+                            </td>
+                            <td class="td_right check">
+                                <input type="submit" class="submit" value="注册">
+                                <span id="msg" style="..."></span>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="rg_form_right">
+                <p>
+                    已有账号？
+                    <a href="#">立即登录</a>
+                </p>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

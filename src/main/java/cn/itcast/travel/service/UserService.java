@@ -13,4 +13,8 @@ public interface UserService {
 
     //激活用户
     boolean active(String code);
+
+    //登录方法
+    User login(User user);
+
 }
