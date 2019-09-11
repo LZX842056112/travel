@@ -120,10 +120,11 @@ public class UserServlet extends BaseServlet {
             info.setFlag(true);
         }
         //响应数据
-        ObjectMapper mapper = new ObjectMapper();
-
+       /* ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json;charset=utf-8");
-        mapper.writeValue(response.getOutputStream(), info);
+        mapper.writeValue(response.getOutputStream(), info);*/
+
+       writeValue(info,response);
     }
 
 //查询单个对象
@@ -132,9 +133,11 @@ public class UserServlet extends BaseServlet {
         Object user = request.getSession().getAttribute("user");
         //将user写回客户端
 
-        ObjectMapper mapper = new ObjectMapper();
+        /*ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json;charset=utf-8");
-        mapper.writeValue(response.getOutputStream(), user);
+        mapper.writeValue(response.getOutputStream(), user);*/
+
+        writeValue(user,response);
     }
 
 //退出功能
