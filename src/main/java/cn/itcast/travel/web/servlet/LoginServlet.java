@@ -18,8 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 /**
- * @auther lizongxiao
- * @date 2019/9/10 - 11:02
+ * 登录
  */
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {

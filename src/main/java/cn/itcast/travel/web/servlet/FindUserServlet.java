@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @auther lizongxiao
- * @date 2019/9/10 - 17:35
+ * 查询单个对象
  */
 @WebServlet("/findUserServlet")
 public class FindUserServlet extends HttpServlet {

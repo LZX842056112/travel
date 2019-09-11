@@ -18,8 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 /**
- * @auther lizongxiao
- * @date 2019/9/8 - 16:01
+ * 注册
  */
 @WebServlet("/registUserServlet")
 public class RegistUserServlet extends HttpServlet {

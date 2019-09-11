@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @auther lizongxiao
- * @date 2019/9/9 - 16:32
+ * 激活
  */
 @WebServlet("/activeUserServlet")
 public class ActiveUserServlet extends HttpServlet {
