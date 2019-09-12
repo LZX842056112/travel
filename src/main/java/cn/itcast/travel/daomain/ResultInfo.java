@@ -2,6 +2,7 @@ package cn.itcast.travel.daomain;
 
 import java.io.Serializable;
 
+
 /**
  * @auther lizongxiao
  * @date 2019/9/8 - 16:21

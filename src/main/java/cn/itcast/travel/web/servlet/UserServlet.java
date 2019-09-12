@@ -9,7 +9,6 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -39,8 +38,8 @@ public class UserServlet extends BaseServlet {
             info.setFlag(false);
             info.setErrorMsg("验证码错误");
             //将info对象序列化为json
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(info);
+            //ObjectMapper mapper = new ObjectMapper();
+            String json = writeValueAsSession(info);
             //将json数据写回客户端
             //设置Content-type
             response.setContentType("application/json;charset=utf-8");
@@ -73,8 +72,8 @@ public class UserServlet extends BaseServlet {
             info.setErrorMsg("注册失败！");
         }
         //将info对象序列化为json
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(info);
+        //ObjectMapper mapper = new ObjectMapper();
+        String json = writeValueAsSession(info);
 
         //将json数据写回客户端
         //设置Content-type
@@ -84,6 +83,29 @@ public class UserServlet extends BaseServlet {
 
 //登录功能
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //验证码校验
+        String check = request.getParameter("check");
+        //从session中获取验证码
+        HttpSession session = request.getSession();
+        String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
+        session.removeAttribute("CHECKCODE_SERVER");//为了保证验证码只能使用一次
+        //比较
+        if (checkcode_server == null || !checkcode_server.equalsIgnoreCase(check)) {
+            //验证码错误
+            ResultInfo info = new ResultInfo();
+            //注册失败
+            info.setFlag(false);
+            info.setErrorMsg("验证码错误");
+            //将info对象序列化为json
+            //ObjectMapper mapper = new ObjectMapper();
+            String json = writeValueAsSession(info);
+            //将json数据写回客户端
+            //设置Content-type
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(json);
+            return;
+        }
+
         //1.获取用户名和密码数据
         Map<String, String[]> map = request.getParameterMap();
         //2.封装User对象

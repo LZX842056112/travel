@@ -9,8 +9,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * @auther lizongxiao
- * @date 2019/9/6 - 15:46
+ * Jedis工具类
  */
 public class JedisUtil {
     private static JedisPool jedisPool;
@@ -39,5 +38,14 @@ public class JedisUtil {
      */
     public static Jedis getJedis(){
         return jedisPool.getResource();
+    }
+
+    /**
+     * 关闭Jedis
+     */
+    public static void close(Jedis jedis) {
+        if (jedis != null) {
+            jedis.close();
+        }
     }
 }

@@ -1,7 +1,6 @@
 package cn.itcast.travel.daomain;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 /**
  * 用户实体类

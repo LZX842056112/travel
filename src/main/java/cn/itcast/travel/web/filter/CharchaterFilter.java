@@ -7,8 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @auther lizongxiao
- * @date 2019/9/8 - 16:05
+ *解决全站乱码问题，处理所有的请求
  */
 @WebFilter("/*")
 public class CharchaterFilter implements Filter {

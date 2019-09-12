@@ -1,11 +1,13 @@
 package cn.itcast.travel.daomain;
+import java.io.Serializable;
+
 
 /**
  * @auther lizongxiao
  * @date 2019/9/8 - 16:22
  *
  */
-public class Category {
+public class Category implements Serializable{
     private int cid;        //分类id
     private String cname;   //分类名称
 
