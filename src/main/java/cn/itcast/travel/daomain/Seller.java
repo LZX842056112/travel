@@ -3,8 +3,7 @@ package cn.itcast.travel.daomain;
 import java.io.Serializable;
 
 /**
- * @auther lizongxiao
- * @date 2019/9/8 - 16:21
+ * 商家信息
  */
 public class Seller implements Serializable {
     private int sid;//商家id

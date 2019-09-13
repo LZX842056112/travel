@@ -17,6 +17,7 @@ public class RouteDaoImpl implements RouteDao {
 
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
+    //根据cid查询总记录数
     @Override
     public int findTotalCount(int cid,String rname) {
 //        String sql = "select count(*) from tab_route where cid = ?";
@@ -32,7 +33,7 @@ public class RouteDaoImpl implements RouteDao {
         }
         if (rname != null && rname.length() > 0){
             sb.append(" and rname like ? ");//模糊查询
-            params.add("%"+rname+"%");
+            params.add("%" + rname + "%");
         }
 
         sql = sb.toString();
@@ -40,6 +41,7 @@ public class RouteDaoImpl implements RouteDao {
         return template.queryForObject(sql,Integer.class,params.toArray());
     }
 
+    //根据cid，start，pageSize查询当前页的数据集合
     @Override
     public List<Route> findByPage(int cid, int start, int pageSize,String rname) {
         //String sql = "select * from tab_route where cid = ? limit ? , ?";
@@ -56,7 +58,7 @@ public class RouteDaoImpl implements RouteDao {
         }
         if (rname != null && rname.length() > 0){
             sb.append(" and rname like ? ");//模糊查询
-            params.add("%"+rname+"%");
+            params.add("%" + rname + "%");
         }
 
         sb.append(" limit ? , ? ");//分页条件
@@ -67,5 +69,12 @@ public class RouteDaoImpl implements RouteDao {
 
 
         return template.query(sql,new BeanPropertyRowMapper<Route>(Route.class),params.toArray());
+    }
+
+    //根据id查询
+    @Override
+    public Route findOne(int rid) {
+        String sql = " select * from tab_route where rid = ?";
+        return template.queryForObject(sql,new BeanPropertyRowMapper<Route>(Route.class),rid);
     }
 }

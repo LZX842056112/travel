@@ -10,5 +10,9 @@ import cn.itcast.travel.daomain.Route;
 public interface RouteService {
 
     //分页条件查询
-    PageBean<Route> pageQuery(int cid,int currentPage,int pageSize,String rname);
+    public PageBean<Route> pageQuery(int cid,int currentPage,int pageSize,String rname);
+
+    //根据id查询一个旅游线路的详情信息
+    public Route findOne(String rid);
+
 }
