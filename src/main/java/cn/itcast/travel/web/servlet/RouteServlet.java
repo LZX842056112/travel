@@ -7,7 +7,6 @@ import cn.itcast.travel.service.impl.RouteServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -28,9 +27,13 @@ public class RouteServlet extends BaseServlet {
         String pageSizeStr = request.getParameter("pageSize");
         String cidStr = request.getParameter("cid");
 
+        //接受rname 线路名称
+        String rname = request.getParameter("rname");
+        rname = new String(rname.getBytes("iso-8859-1"),"utf-8");
+
         int cid = 0;//类别id
         //2.处理参数
-        if (cidStr != null && cidStr.length() > 0){
+        if (cidStr != null && cidStr.length() > 0 && !"null".equals(cidStr)){
             cid = Integer.parseInt(cidStr);
         }
 
@@ -49,7 +52,7 @@ public class RouteServlet extends BaseServlet {
         }
 
         //3.调用service查询PageBean对象
-        PageBean<Route> pb = routeService.pageQuery(cid, currentPage, pageSize);
+        PageBean<Route> pb = routeService.pageQuery(cid, currentPage, pageSize,rname);
 
         //4.将PageBean对象序列化为json，返回
         writeValue(pb,response);

@@ -11,6 +11,6 @@ import java.util.List;
 public interface CategoryDao {
 
     //查询所有
-    public List<Category> findAll();
+    List<Category> findAll();
 
 }
