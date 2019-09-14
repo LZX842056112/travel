@@ -2,7 +2,10 @@ package cn.itcast.travel.web.servlet;
 
 import cn.itcast.travel.daomain.PageBean;
 import cn.itcast.travel.daomain.Route;
+import cn.itcast.travel.daomain.User;
+import cn.itcast.travel.service.FavoriteService;
 import cn.itcast.travel.service.RouteService;
+import cn.itcast.travel.service.impl.FavoriteServiceImpl;
 import cn.itcast.travel.service.impl.RouteServiceImpl;
 
 import javax.servlet.ServletException;
@@ -19,6 +22,7 @@ import java.io.IOException;
 public class RouteServlet extends BaseServlet {
 
     private RouteService routeService = new RouteServiceImpl();
+    private FavoriteService favoriteService = new FavoriteServiceImpl();
 
     //分页查询
     public void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -67,4 +71,44 @@ public class RouteServlet extends BaseServlet {
         //3.转为json写回客户端
         writeValue(route,response);
     }
+
+    //根据id查询一个旅游线路的详情信息
+    public void isFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //1.获取线路id
+        String rid = request.getParameter("rid");
+        //2.获取当前登录的用户 user
+        User user = (User) request.getSession().getAttribute("user");
+        int uid;//用户
+        if (user == null){
+            //用户尚未登录
+            uid = 0;
+        }else{
+            //用户已经登陆
+            uid = user.getUid();
+        }
+        //3.调用FavriteService查询是否收藏
+        boolean flag = favoriteService.isFavorite(rid, uid);
+        //4.写回客户端
+        writeValue(flag,response);
+    }
+
+    //添加客户端
+    public void addFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //1.获取线路id
+        String rid = request.getParameter("rid");
+        //2.获取当前登录的用户 user
+        User user = (User) request.getSession().getAttribute("user");
+        int uid;//用户id
+        if (user == null){
+            //用户尚未登录
+            uid = 0;
+        }else{
+            //用户已经登陆
+            uid = user.getUid();
+        }
+        //3.调用service添加
+        favoriteService.add(rid,uid);
+
+    }
+
 }

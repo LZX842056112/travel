@@ -217,6 +217,8 @@
             $("#sname").html(route.seller.sname);
             $("#consphone").html(route.seller.consphone);
             $("#address").html(route.seller.address);
+            //设置收藏次数
+            $("#favoriteCount").html("已收藏"+route.count+"次");
 
             //图片展示
             var ddstr = '<a class="up_img up_img_disable"></a>';
@@ -244,6 +246,46 @@
             goImg();
         });
     });
+    
+    $(function () {
+        //发送请求，判断用户是否收藏过该线路
+        var rid = getParameter("rid");
+        $.get("route/isFavorite",{rid:rid},function (flag) {
+            if (flag) {
+                //用户已经收藏过
+                //<a class="btn already" disabled="disabled">
+                //设置收藏按钮得样式
+                $("#favorite").addClass("already");
+                $("#favorite").attr("disabled","disabled");
+
+                //删除按钮的点击事件
+                $("#favorite").removeAttr("onclick");
+            }else{
+                //用户没有收藏
+            }
+        });
+    });
+
+    //点击收藏按钮触发的方法
+    function addFavorite() {
+        var rid = getParameter("rid");
+        //1.判断用户是否登陆
+        $.get("user/findOne",{},function (user) {
+            if (user){
+                //用户登录
+                //添加功能
+                $.get("route/addFavorite",{rid:rid},function () {
+                    //代码刷新页面
+                    location.reload();
+                })
+            } else {
+                //用户没有登录
+                alert("您尚未登录，请登录");
+                location.href="http://localhost/travel/login.html";
+            }
+        });
+
+    }
 
 
 
