@@ -14,22 +14,22 @@
 <div id="header"></div>
 <!-- 详情 start -->
 <div class="wrap">
-    <div id="aa" class="bread_box">
-        <a href="/travel/index.html">首页</a>
+    <div class="bread_box">
+        <a href="index.html">首页</a>
         <span> &gt;</span>
-        <a href="#">国内游</a>
+        <a id="aa1" href="#">国内游</a>
         <span> &gt;</span>
-        <a href="#">全国-曼谷6-7天自由行 泰国出境旅游 特价往返机票自由行二次确认</a>
+        <a id="aa2" href="#">全国-曼谷6-7天自由行 泰国出境旅游 特价往返机票自由行二次确认</a>
     </div>
     <div class="prosum_box">
-        <dl class="prosum_left">
+        <dl id="dd" class="prosum_left">
             <dt>
-                <img alt="" class="big_img" src="http://www.jinmalvyou.com/Public/uploads/goods_img/img_size4/201703/m49788843d72171643297ccc033d9288ee.jpg">
+                <img alt="" class="big_img" src="">
             </dt>
-            <dd id="dd">
+            <dd>
                 <a class="up_img up_img_disable"></a>
-                <a title="" class="little_img" data-bigpic="http://www.jinmalvyou.com/Public/uploads/goods_img/img_size4/201703/m40920d0669855e745d97f9ad1df966ebb.jpg">
-                    <img src="http://www.jinmalvyou.com/Public/uploads/goods_img/img_size2/201703/m20920d0669855e745d97f9ad1df966ebb.jpg">
+                <a title="" class="little_img" data-bigpic="">
+                    <img src="">
                 </a>
                 <a class="down_img down_img_disable" style="margin-bottom: 0;"></a>
             </dd>
@@ -48,7 +48,7 @@
                     <a class="btn" id="favorite" onclick="addFavorite()"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
 
                     <!--<a class="btn already" disabled="disabled"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>-->
-                    <span id="favoriteCount">已收藏100次</span>
+                    <span id="favoriteCount"></span>
                 </p>
             </div>
         </div>
@@ -149,27 +149,15 @@
             $('.big_img').attr('src', big_pic);
         }
     }
-/*
-<div class="bread_box">
-        <a href="/travel/index.html">首页</a>
-        <span> &gt;</span>
-        <a  id="aa1" href="#">国内游</a>
-        <span> &gt;</span>
-        <a  id="aa2" href="#">全国-曼谷6-7天自由行 泰国出境旅游 特价往返机票自由行二次确认</a>
-    </div>
- */
-    $(function () {
+
+   $(function () {
         //1.获取rid
         var rid = getParameter("rid");
-        //2.发送请求请求 route/findOne
-        $.get("route/findOne",{rid:rid},function (route) {
-
-            var aastr = '<a href="/travel/index.html">首页</a><span> &gt;</span>';
-            var aa1 = '<a href="http://localhost/travel/route_list.html?cid='+route.cid+'&rname=">'+route.cid+'</a><span> &gt;</span>';
-            var aa2 = '<a href="http://localhost/travel/route_detail.html?rid='+rid+'">'+route.rname+'</a>';
-
-            aastr = aastr + aa1 +aa2;
-            $("#aa").html(aastr);
+        //2.发送请求请求 category/findByCid
+        $.get("category/findByCid",{rid:rid},function (category) {
+            //'<a href="">'+route.category.cname+'</a><span> &gt;</span>';
+            $("#aa1").html(category.cname);
+            $("#aa1").prop('href','http://localhost/travel/route_list.html?cid='+category.cid+'&rname=');
         });
     });
 
@@ -219,11 +207,19 @@
             $("#consphone").html(route.seller.consphone);
             $("#address").html(route.seller.address);
 
+            $("#aa2").html(route.rname);
+            $("#aa2").prop('href','http://localhost/travel/route_detail.html?rid='+rid+'');
+
+
             //设置收藏次数
             $("#favoriteCount").html("已收藏"+route.count+"次");
 
             //图片展示
-            var ddstr = '<a class="up_img up_img_disable"></a>';
+            var ddstr = '<dt>\n' +
+                '                <img alt="" class="big_img" src="'+route.routeImgList[0].smallPic+'">\n' +
+                '            </dt>\n' +
+                '            <dd>\n' +
+                '                <a class="up_img up_img_disable"></a>';
 
             //遍历routeImgList
             for (var i = 0; i < route.routeImgList.length; i++) {
@@ -240,7 +236,8 @@
                 ddstr += astr;
             }
 
-            ddstr += '<a class="down_img down_img_disable" style="margin-bottom: 0;"></a>';
+            ddstr += '<a class="down_img down_img_disable" style="margin-bottom: 0;"></a>\n' +
+                '            </dd>';
 
             $("#dd").html(ddstr);
 
@@ -282,8 +279,9 @@
                 })
             } else {
                 //用户没有登录
-                alert("您尚未登录，请登录");
-                location.href="http://localhost/travel/login.html";
+                if(confirm("您尚未登录，请登录")){
+                    location.href="http://localhost/travel/login.html";
+                }
             }
         });
     }

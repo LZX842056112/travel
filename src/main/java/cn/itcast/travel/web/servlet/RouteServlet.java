@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @auther lizongxiao
@@ -71,6 +72,17 @@ public class RouteServlet extends BaseServlet {
         //3.转为json写回客户端
         writeValue(route,response);
     }
+
+    //根据cid查询
+    public void findByCid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //1.接收cid
+        String cid = request.getParameter("cid");
+        //2.调用service查询route对象
+        List<Route> routes = routeService.findByCid(Integer.parseInt(cid));
+        //3.转为json写回客户端
+        writeValue(routes,response);
+    }
+
 
     //根据id查询一个旅游线路的详情信息
     public void isFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

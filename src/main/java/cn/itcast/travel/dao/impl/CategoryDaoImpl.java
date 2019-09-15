@@ -22,4 +22,11 @@ public class CategoryDaoImpl implements CategoryDao {
         String sql = "select * from tab_category ";
         return template.query(sql,new BeanPropertyRowMapper<Category>(Category.class));
     }
+
+    //根据cid查询
+    @Override
+    public Category findByCid(int cid) {
+        String sql = "select * from tab_category where cid = ?";
+        return template.queryForObject(sql,new BeanPropertyRowMapper<Category>(Category.class),cid);
+    }
 }

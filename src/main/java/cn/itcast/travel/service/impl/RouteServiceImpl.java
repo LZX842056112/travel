@@ -8,13 +8,12 @@ import cn.itcast.travel.dao.impl.FavoriteDaoImpl;
 import cn.itcast.travel.dao.impl.RouteDaoImpl;
 import cn.itcast.travel.dao.impl.RouteImgDaoImpl;
 import cn.itcast.travel.dao.impl.SellerDaoImpl;
-import cn.itcast.travel.daomain.PageBean;
-import cn.itcast.travel.daomain.Route;
-import cn.itcast.travel.daomain.RouteImg;
-import cn.itcast.travel.daomain.Seller;
+import cn.itcast.travel.daomain.*;
 import cn.itcast.travel.service.RouteService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @auther lizongxiao
@@ -68,4 +67,12 @@ public class RouteServiceImpl implements RouteService {
 
         return route;
     }
+
+    //根据cid查询
+    @Override
+    public List<Route> findByCid(int cid) {
+        List<Route> routes = routeDao.findByCid(cid);
+        return routes;
+    }
+
 }

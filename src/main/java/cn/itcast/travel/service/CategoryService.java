@@ -12,4 +12,8 @@ public interface CategoryService {
 
     //查询所有
     List<Category> findAll();
+
+    //根据cid查询
+    Category findByCid(int cid);
+
 }

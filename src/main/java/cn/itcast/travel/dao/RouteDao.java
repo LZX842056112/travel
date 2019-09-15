@@ -17,4 +17,7 @@ public interface RouteDao {
 
     //根据id查询
     public Route findOne(int rid);
+
+    //根据cid查询
+    public List<Route> findByCid(int cid);
 }

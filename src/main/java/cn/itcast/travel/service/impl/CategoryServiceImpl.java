@@ -56,5 +56,11 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return cs;
     }
+
+    //根据cid查询
+    @Override
+    public Category findByCid(int cid) {
+        return categoryDao.findByCid(cid);
+    }
 }
 
